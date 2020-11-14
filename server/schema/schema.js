@@ -6,14 +6,18 @@ const {
     GraphQLString, 
     GraphQLSchema,
     GraphQLID,
-    GraphQLInt
+    GraphQLInt,
+    GraphQLList
 } = graphql;
 
 //dummy data
 var songs = [
     {name: 'Thriller', genre:'Pop', id:'1', artistId:'1'},
-    {name: 'EverLong', genre:'rock', id:'2', artistId:'2'},
-    {name: 'Around The World', genre:'Electronic', id:'3', artistId:'3'}
+    {name: 'EverLong', genre:'Rock', id:'2', artistId:'2'},
+    {name: 'Around The World', genre:'Electronic', id:'3', artistId:'3'},
+    {name: 'Pretender', genre:'Rock', id:'4', artistId:'2'},
+    {name: 'Bad', genre:'Pop', id:'5', artistId:'1'},
+    {name: 'Get Lucky', genre:'Electronic', id:'6', artistId:'3'},
 ];
 
 //dummy data
@@ -44,7 +48,13 @@ const ArtistType = new GraphQLObjectType({
     fields: () => ({
         id: {type: GraphQLID},
         name: {type: GraphQLString},
-        age: {type: GraphQLInt}
+        age: {type: GraphQLInt},
+        songs: {
+            type: new GraphQLList(SongType),
+            resolve(parent, args){
+                return _.filter(songs, {artistId: parent.id});
+            }
+        }
     })
 });
 
