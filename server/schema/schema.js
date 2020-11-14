@@ -24,7 +24,7 @@ var songs = [
 var artists = [
     {name: 'Michael Jackson', age:50, id:'1'},
     {name: 'Dave Grohl', age:51, id:'2'},
-    {name: 'Daft Punk', genre:45, id:'3'}
+    {name: 'Daft Punk', age:45, id:'3'}
 ]
 
 const SongType = new GraphQLObjectType({
@@ -73,6 +73,18 @@ const RootQuery = new GraphQLObjectType({
             args: {id: {type: GraphQLID}},
             resolve(parent,args){
                 return _.find(artists, {id: args.id});
+            }
+        },
+        songs: {
+            type: new GraphQLList(SongType),
+            resolve(parent, args){
+                return songs;
+            }
+        },
+        artists: {
+            type: new GraphQLList(ArtistType),
+            resolve(parent, args){
+                return artists;
             }
         }
     }
