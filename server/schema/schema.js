@@ -11,9 +11,9 @@ const {
 
 //dummy data
 var songs = [
-    {name: 'Thriller', genre:'Pop', id:'1'},
-    {name: 'EverLong', genre:'rock', id:'2'},
-    {name: 'Around The World', genre:'Electronic', id:'3'}
+    {name: 'Thriller', genre:'Pop', id:'1', artistId:'1'},
+    {name: 'EverLong', genre:'rock', id:'2', artistId:'2'},
+    {name: 'Around The World', genre:'Electronic', id:'3', artistId:'3'}
 ];
 
 //dummy data
@@ -28,7 +28,14 @@ const SongType = new GraphQLObjectType({
     fields: () => ({
         id: {type: GraphQLID},
         name: {type: GraphQLString},
-        genre: {type: GraphQLString}
+        genre: {type: GraphQLString},
+        artist: {
+            type: ArtistType,
+            resolve(parent, args){
+                console.log(parent);
+                return _.find(artists, {id: parent.artistId});
+            }
+        }
     })
 });
 
