@@ -23,6 +23,7 @@ const SongType = new GraphQLObjectType({
             resolve(parent, args){
                 //console.log(parent);
                 //return _.find(artists, {id: parent.artistId});
+                return Artist.findById(parent.artistId);
             }
         }
     })
@@ -38,6 +39,7 @@ const ArtistType = new GraphQLObjectType({
             type: new GraphQLList(SongType),
             resolve(parent, args){
                 //return _.filter(songs, {artistId: parent.id});
+                return Song.find({artistId: parent.id});
             }
         }
     })
@@ -51,6 +53,7 @@ const RootQuery = new GraphQLObjectType({
             args: {id: {type: GraphQLID}},
             resolve(parent,args){
                 //return _.find(songs, {id: args.id});
+                return Song.findById(args.id);
             }
         },
         artist: {
@@ -58,18 +61,21 @@ const RootQuery = new GraphQLObjectType({
             args: {id: {type: GraphQLID}},
             resolve(parent,args){
                 //return _.find(artists, {id: args.id});
+                return Artist.findById(args.id);
             }
         },
         songs: {
             type: new GraphQLList(SongType),
             resolve(parent, args){
                 //return songs;
+                return Song.find({});
             }
         },
         artists: {
             type: new GraphQLList(ArtistType),
             resolve(parent, args){
                 //return artists;
+                return Artist.find({});
             }
         }
     }
