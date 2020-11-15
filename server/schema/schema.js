@@ -75,6 +75,43 @@ const RootQuery = new GraphQLObjectType({
     }
 });
 
-module.exports = new GraphQLSchema({
-    query: RootQuery
+const Mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+        addArtist: {
+            type: ArtistType,
+            args: {
+                name: {type: GraphQLString},
+                age: {type: GraphQLInt}
+            },
+            resolve(parent, args){
+                let artist = new Artist({
+                    name: args.name,
+                    age: args.age
+                });
+                return artist.save();
+            }
+        },
+        addSong: {
+            type: SongType,
+            args: {
+                name: {type: GraphQLString},
+                genre: {type: GraphQLString},
+                artistId: {type: GraphQLID}
+            },
+            resolve(parent, args){
+                let song = new Song({
+                    name: args.name,
+                    genre: args.genre,
+                    artistId: args.artistId
+                });
+                return song.save();
+            }
+        }
+    }
 })
+
+module.exports = new GraphQLSchema({
+    query: RootQuery,
+    mutation: Mutation
+});
