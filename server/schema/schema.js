@@ -9,7 +9,8 @@ const {
     GraphQLSchema,
     GraphQLID,
     GraphQLInt,
-    GraphQLList
+    GraphQLList,
+    GraphQLNonNull
 } = graphql;
 
 const SongType = new GraphQLObjectType({
@@ -87,8 +88,8 @@ const Mutation = new GraphQLObjectType({
         addArtist: {
             type: ArtistType,
             args: {
-                name: {type: GraphQLString},
-                age: {type: GraphQLInt}
+                name: {type: new GraphQLNonNull(GraphQLString)},
+                age: {type: new GraphQLNonNull(GraphQLInt)}
             },
             resolve(parent, args){
                 let artist = new Artist({
@@ -101,9 +102,9 @@ const Mutation = new GraphQLObjectType({
         addSong: {
             type: SongType,
             args: {
-                name: {type: GraphQLString},
-                genre: {type: GraphQLString},
-                artistId: {type: GraphQLID}
+                name: {type: new GraphQLNonNull(GraphQLString)},
+                genre: {type: new GraphQLNonNull(GraphQLString)},
+                artistId: {type: new GraphQLNonNull(GraphQLID)}
             },
             resolve(parent, args){
                 let song = new Song({
