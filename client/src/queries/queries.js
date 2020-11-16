@@ -15,6 +15,14 @@ const getSongsQuery = gql`
             id
         }
     }
+`;
+const addSongMutation = gql`
+    mutation($name: String!, $genre: String!, $artistId: ID!){
+        addSong(name:$name, genre:$genre, artistId:$artistId){
+            name
+            id
+        }
+    }
 `
 
-export {getArtistsQuery, getSongsQuery};
+export {getArtistsQuery, getSongsQuery, addSongMutation};

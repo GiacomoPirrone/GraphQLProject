@@ -1,9 +1,10 @@
-import {useQuery} from '@apollo/client';
-import {getArtistsQuery} from '../queries/queries';
+import {useQuery, useMutation} from '@apollo/client';
+//import {flowRight as compose} from 'lodash';
+import {getArtistsQuery, addSongMutation, getSongsQuery} from '../queries/queries';
+import React, {useState} from 'react';
 
-function DisplayArtists(){
+const displayArtists = (loading, data, error) =>{
 
-    const {loading, error, data} = useQuery(getArtistsQuery);
     if(loading) return <option disabled>Loading Artists</option>;
     if(error) return <option disabled>Oops! Something went wrong</option>;
     else{
@@ -16,24 +17,43 @@ function DisplayArtists(){
 
 function AddSong(){
 
+    const[name, setName] = useState("");
+    const[genre, setGenre] = useState("");
+    const[artistId, setArtistId] = useState("");
+    const {loading, error, data} = useQuery(getArtistsQuery);
+    const [addSongMut] = useMutation(addSongMutation);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addSongMut({
+            variables: {
+                name: name,
+                genre: genre,
+                artistId: artistId
+            },
+            refetchQueries: [{ query: getSongsQuery}]
+        });
+
+    }
+
     return (
-        <form id="add-song">
+        <form id="add-song" onSubmit={handleSubmit}>
 
             <div className="field">
                 <label>Song name:</label>
-                <input type="text" />
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
             </div>
 
             <div className="field">
                 <label>Genre:</label>
-                <input type="text" />
+                <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
             </div>
 
             <div className="field">
                 <label>Artist:</label>
-                <select>
+                <select value ={artistId} onChange={(e) => setArtistId(e.target.value)} >
                     <option>Select author</option>
-                    <DisplayArtists/>
+                    {displayArtists(loading, data, error)}
                 </select>
             </div>
 
