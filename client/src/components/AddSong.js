@@ -1,13 +1,5 @@
-import {gql, useQuery} from '@apollo/client';
-
-const getArtistsQuery = gql`
-    {
-        artists {
-            name
-            id
-        }
-    }
-`
+import {useQuery} from '@apollo/client';
+import {getArtistsQuery} from '../queries/queries';
 
 function DisplayArtists(){
 
