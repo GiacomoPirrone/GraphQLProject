@@ -7,7 +7,7 @@ const displaySongDetails = (loading, data, error) =>{
     if(error) return <p>Song not selected yet...</p>
     if(data.song){
         return(
-            <div>
+            <div id="song-details">
                 <h2>{data.song.name}</h2>
                 <p>{data.song.genre}</p>
                 <p>{data.song.artist.name}</p>
@@ -18,6 +18,7 @@ const displaySongDetails = (loading, data, error) =>{
                     })
                     }
                 </ul>
+                <button onClick={() => {document.getElementById("song-details").style.display="none"}}>Close Details</button>
             </div>
         )
     }else{

@@ -3,3 +3,6 @@ body {
   background: #eee;
   font-family: "Nunito";
 }
+.listed-song{
+  cursor: pointer;
+}

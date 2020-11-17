@@ -1,6 +1,7 @@
 import {useQuery} from '@apollo/client';
 import {getSongsQuery} from '../queries/queries';
 import React, {useState} from 'react';
+import '../index.css';
 
 //Components
 import SongDetails from './SongDetails';
@@ -19,7 +20,7 @@ function SongList(){
             <div>
                 <ul id="song-list">
                     {data.songs.map((song) => (
-                        <li key={song.id} onClick={(e) => setSelected(song.id)}>{song.name}</li>
+                        <li className="listed-song" key={song.id} onClick={(e) => setSelected(song.id)}>{song.name}</li>
                     ))}
                 </ul>
                 <SongDetails songId={selected}/>

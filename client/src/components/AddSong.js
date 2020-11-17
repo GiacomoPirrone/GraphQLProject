@@ -58,7 +58,6 @@ function AddSong(){
             </div>
 
             <button>+</button>
-            
         </form>
     );
 }
