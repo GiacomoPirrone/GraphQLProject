@@ -18,11 +18,29 @@ const getSongsQuery = gql`
 `;
 const addSongMutation = gql`
     mutation($name: String!, $genre: String!, $artistId: ID!){
-        addSong(name:$name, genre:$genre, artistId:$artistId){
+        addSong(name: $name, genre: $genre, artistId: $artistId){
             name
             id
         }
     }
 `
+const getSongQuery = gql`
+    query($id: ID){
+        song(id: $id){
+            id
+            name
+            genre
+            artist{
+                id
+                name
+                age
+                songs{
+                    name
+                    id
+                }
+            }
+        }
+    }
+`
 
-export {getArtistsQuery, getSongsQuery, addSongMutation};
+export {getArtistsQuery, getSongsQuery, addSongMutation, getSongQuery};
