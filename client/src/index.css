@@ -1,0 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:wght@300;500&display=swap");
+body {
+  background: #eee;
+  font-family: "Nunito";
+}
+.listed-song{
+  cursor: pointer;
+}
