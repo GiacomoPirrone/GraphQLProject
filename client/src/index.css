@@ -1,8 +1,31 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:wght@300;500&display=swap");
+@import "spectre.css";
+
 body {
   background: #eee;
+}
+.songs-content{
+  cursor: pointer;
+  border-radius: .1rem;
+  padding: 1rem;
+  background: white;
+  display: block;
+  margin: 5px;
+  box-shadow: 2px 3px 2px gray;
+  transition: all .2s ease-in-out; 
   font-family: "Nunito";
 }
-.listed-song{
-  cursor: pointer;
+
+.navbar{
+  background-color: rgb(37, 37, 37) ;
+  color: white;   
+  padding: 10px;
+}
+
+.song-container{
+  padding-top: 30px;
+}
+
+.navbar .navbar-section .nav-links{
+  color: white;
 }

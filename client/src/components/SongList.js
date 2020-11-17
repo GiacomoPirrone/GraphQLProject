@@ -17,13 +17,34 @@ function SongList(){
 
     else {
         return (
-            <div>
-                <ul id="song-list">
+            <div class="container song-container">
+                <div className="columns">
                     {data.songs.map((song) => (
-                        <li className="listed-song" key={song.id} onClick={(e) => setSelected(song.id)}>{song.name}</li>
+                        <div className="column col-2 popover popover-bottom">
+                            <div className="songs-content" key={song.id}>{song.name}</div>
+                                <div class="popover-container">
+                                    <div className="card">
+                                        <div className="card-header">
+                                            {song.name}
+                                        </div>
+                                    <div className="card-body">
+                                        By: {song.artist.name}<br/>
+                                        Genre: {song.genre}<br/><br/>
+                                        Other Songs by Artist:
+                                        <ul>
+                                            {song.artist.songs.slice(0,3).map((song)=> (
+                                                <li>{song.name}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="card-footer">
+                                        {/*nothing here as of yet*/}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     ))}
-                </ul>
-                <SongDetails songId={selected}/>
+                </div>
             </div>
         )
     }

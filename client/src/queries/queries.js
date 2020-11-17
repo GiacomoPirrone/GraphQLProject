@@ -13,6 +13,16 @@ const getSongsQuery = gql`
         songs {
             name
             id
+            genre
+            artist{
+                id
+                name
+                age
+                songs{
+                    name
+                    id
+                }
+            }
         }
     }
 `;

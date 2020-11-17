@@ -1,8 +1,10 @@
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import './index.css';
 
 //components
 import SongList from './components/SongList';
 import AddSong from './components/AddSong';
+import Header from './components/Header';
 
 //apollo client setup
 const client = new ApolloClient({
@@ -14,7 +16,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div id="main">
-        <h1>Giacomo's Music List</h1>
+        <Header/>
         <SongList/>
         <AddSong/>
       </div>
